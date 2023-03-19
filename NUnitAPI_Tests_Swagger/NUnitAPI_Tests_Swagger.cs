@@ -12,6 +12,10 @@ namespace NUnitAPI_Tests_Swagger
 		{
 		}
 
+		/// <summary>
+		/// Получить информацию о пользователе.
+		/// </summary>
+		/// <param name="userID"></param>
 		[TestCase(6)]
 		public void GetUserInfoById(int userID)
 		{
@@ -37,6 +41,9 @@ namespace NUnitAPI_Tests_Swagger
 		}
 	}
 
+	/// <summary>
+	/// Информация о пользователе.
+	/// </summary>
 	public class UserResponse
 	{
 		public Data? data;
