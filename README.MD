@@ -10,7 +10,7 @@
 Подробнее про `RestSharp` по ссылке https://restsharp.dev/intro.html
 
 ## HttpClientFactory_DI
-Реализация применения IHttpClientFactory и внедрение записимостей для выполнения запроса к одному API методу с сайта https://reqres.in/
+Реализация применения IHttpClientFactory и внедрение зависимостей для выполнения запроса к одному API методу с сайта https://reqres.in/
 
 Сервисы:
 - `HttpClientFactoryService_WithDefaultClient` с десериализацией `System.Text.Json` из `String`;
