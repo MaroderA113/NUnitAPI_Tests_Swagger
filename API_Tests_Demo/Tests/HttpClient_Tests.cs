@@ -3,7 +3,9 @@ using API_Tests_Demo.Services;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using NUnit.Framework;
+using System;
 using System.Net;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -11,6 +13,12 @@ namespace API_Tests_Demo.Tests;
 
 public class HttpClient_Tests
 {
+	private static SocketsHttpHandler socketsHandler = new SocketsHttpHandler
+	{
+		PooledConnectionLifetime = TimeSpan.FromMinutes(2)
+	};
+	private static HttpClient httpClient = new HttpClient(socketsHandler);
+	private static HttpClient_Service httpClientService = new HttpClient_Service(httpClient);
 	private static JsonSerializerOptions _options;
 
 	[SetUp]
@@ -19,11 +27,11 @@ public class HttpClient_Tests
 	}
 
 	[Test]
-	[TestCase("6", "6")]
+	[TestCase("6", 6)]
+	[TestCase("10", 10)]
 	[Category("ApiTests")]
 	public async Task GetUserInfoById(string userID, int expectedUserId)
 	{
-		HttpClient_Service httpClientService = new HttpClient_Service();
 		var response = await httpClientService.GetUserInfoById(userID);
 
 		using (new AssertionScope())

@@ -1,7 +1,4 @@
-﻿using HttpClientFactory_DI.DataTransferObjects.NewtonsoftJson;
-using Newtonsoft.Json;
-using System;
-using System.IO;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -20,22 +17,12 @@ namespace HttpClientFactory_DI.Clients
 			_client.DefaultRequestHeaders.Clear();
 		}
 
-		public async Task<SingleUserResponse> GetUserInfoById_ReadAsStream(string useId)
+		public async Task<HttpResponseMessage> GetUserInfoById_ReadAsStream(string useId)
 		{
-			using (var response = await _client.GetAsync($"users/{useId}", HttpCompletionOption.ResponseHeadersRead))
-			{
-				response.EnsureSuccessStatusCode();
+			var response = await _client.GetAsync($"users/{useId}", HttpCompletionOption.ResponseHeadersRead);
+			response.EnsureSuccessStatusCode();
 
-				var stream = await response.Content.ReadAsStreamAsync();
-				var serializer = new JsonSerializer();
-
-				using (var sr = new StreamReader(stream))
-				using (var jsonReader = new JsonTextReader(sr))
-				{
-					var singleUserResponse = serializer.Deserialize<SingleUserResponse>(jsonReader);
-					return singleUserResponse;
-				}
-			}
+			return response;
 		}
 	}
 }

@@ -4,18 +4,29 @@
 Демо проект тестирования одного API метода с сайта https://reqres.in/
 
 Сервисы:
-- `RestSharp_Service` с десериализацией `Newtonsoft.Json`;
-- `HttpClient_Service` с десериализацией `System.Text.Json` из `String`.
+- `RestSharp_Service`;
+- `HttpClient_Service`.
+
+Тесты:
+- `HttpClient_Tests` с десериализацией `System.Text.Json` из `String`;
+- `RestSharp_Tests` с десериализацией `Newtonsoft.Json`.
 
 Подробнее про `RestSharp` по ссылке https://restsharp.dev/intro.html
 
 ## HttpClientFactory_DI
 Реализация применения IHttpClientFactory и внедрение зависимостей для выполнения запроса к одному API методу с сайта https://reqres.in/
 
+Для использования соответствующего сервиса нужно раскомментировать соотвествующие строки в классе `Program`.
+
 Сервисы:
-- `HttpClientFactoryService_WithDefaultClient` с десериализацией `System.Text.Json` из `String`;
-- `HttpClientFactoryService_WithNamedClient` с десериализацией `Newtonsoft.Json` из `String`;
-- `HttpClientFactoryService_WithTypedClient` с десериализацией `Newtonsoft.Json` из `Stream`.
+- `HttpClientFactoryService_DefaultClient`;
+- `HttpClientFactoryService_NamedClient`;
+- `HttpClientFactoryService_TypedClient`.
+
+Тесты:
+- `DefaultClient_Tests` с десериализацией `System.Text.Json` из `String`;
+- `NamedClient_Tests` с десериализацией `Newtonsoft.Json` из `String`;
+- `TypedClient_Tests` с десериализацией `Newtonsoft.Json` из `Stream`.
 
 ## DTO:
 SingleUserResponse сгенерирован с помощью сервиса https://json2csharp.com/

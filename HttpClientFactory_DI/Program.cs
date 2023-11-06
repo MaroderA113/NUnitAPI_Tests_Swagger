@@ -23,7 +23,7 @@ namespace HttpClientFactory_DI
 		{
 			// WithDefaultClient
 			//services.AddHttpClient();
-			//services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_WithDefaultClient>();
+			//services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_DefaultClient>();
 
 			// WithNamedClient
 			//services.AddHttpClient("SingleUserClient", config =>
@@ -32,11 +32,11 @@ namespace HttpClientFactory_DI
 			//	config.Timeout = new TimeSpan(0, 0, 30);
 			//	config.DefaultRequestHeaders.Clear();
 			//});
-			//services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_WithNamedClient>();
+			//services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_NamedClient>();
 
 			// WithTypedClient
 			services.AddHttpClient<SingleUserClient>();
-			services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_WithTypedClient>();
+			services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_TypedClient>();
 		}
 
 	}
