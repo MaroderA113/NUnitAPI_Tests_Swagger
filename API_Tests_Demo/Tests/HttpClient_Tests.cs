@@ -13,11 +13,15 @@ namespace API_Tests_Demo.Tests;
 
 public class HttpClient_Tests
 {
+	//private static HttpMessageHandler handler = new HttpClientHandler();
+	//private static HttpClient httpClient = new HttpClient(handler, false);
+
 	private static SocketsHttpHandler socketsHandler = new SocketsHttpHandler
 	{
 		PooledConnectionLifetime = TimeSpan.FromMinutes(2)
 	};
 	private static HttpClient httpClient = new HttpClient(socketsHandler);
+
 	private static HttpClient_Service httpClientService = new HttpClient_Service(httpClient);
 	private static JsonSerializerOptions _options;
 

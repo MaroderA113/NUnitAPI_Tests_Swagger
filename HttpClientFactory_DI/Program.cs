@@ -13,17 +13,17 @@ namespace HttpClientFactory_DI
 			var services = new ServiceCollection();
 			ConfigureServices(services);
 			 
-			var provider = services.BuildServiceProvider();
-			var service = provider.GetRequiredService<IHttpClientServiceImplementation>();
+			var serviceProvider = services.BuildServiceProvider();
+			var requiredService = serviceProvider.GetRequiredService<IHttpClientServiceImplementation>();
 
-			await service.Execute();
+			await requiredService.Execute();
 		}
 
 		private static void ConfigureServices(IServiceCollection services)
 		{
 			// WithDefaultClient
-			//services.AddHttpClient();
-			//services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_DefaultClient>();
+			services.AddHttpClient();
+			services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_DefaultClient>();
 
 			// WithNamedClient
 			//services.AddHttpClient("SingleUserClient", config =>
@@ -35,8 +35,8 @@ namespace HttpClientFactory_DI
 			//services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_NamedClient>();
 
 			// WithTypedClient
-			services.AddHttpClient<SingleUserClient>();
-			services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_TypedClient>();
+			//services.AddHttpClient<SingleUserClient>();
+			//services.AddScoped<IHttpClientServiceImplementation, HttpClientFactoryService_TypedClient>();
 		}
 
 	}
