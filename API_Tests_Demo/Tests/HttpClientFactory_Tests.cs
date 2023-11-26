@@ -1,22 +1,24 @@
-﻿using API_Tests_Demo.DataTransferObjects.NewtonsoftJson;
+﻿using API_Tests_Demo.DataTransferObjects.SystemTextJson;
 using API_Tests_Demo.Services;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Newtonsoft.Json;
 using NUnit.Framework;
-using Refit;
+using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace API_Tests_Demo.Tests
 {
-	public class Refit_Tests
+	public class HttpClientFactory_Tests
 	{
-		private static readonly string Url = "https://reqres.in/api/";
-		private readonly IRefitClient _refitClient;
+		private static HttpClientFactory_Service _httpClientFactory_Service;
+		private static JsonSerializerOptions _options;
 
-		public Refit_Tests()
+		[SetUp]
+		public void Setup()
 		{
-			_refitClient = RestService.For<IRefitClient>(Url);
+			_httpClientFactory_Service = new ();
+			_options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 		}
 
 		[Test]
@@ -25,9 +27,16 @@ namespace API_Tests_Demo.Tests
 		[Category("ApiTests")]
 		public async Task GetUserInfoById(string userID, int expectedUserId)
 		{
-			var response = await _refitClient.GetUserInfoById(userID);
+			var response = await _httpClientFactory_Service.GetUserInfoById(userID);
 
-			SingleUserResponse singleUserResponse = JsonConvert.DeserializeObject<SingleUserResponse>(response);
+			using (new AssertionScope())
+			{
+				response.StatusCode.Should().Be(HttpStatusCode.OK);
+				response.Content.Headers.ContentType.ToString().Should().Contain("application/json");
+			};
+
+			string responseContent = await response.Content.ReadAsStringAsync();
+			var singleUserResponse = JsonSerializer.Deserialize<SingleUserResponse>(responseContent, _options);
 
 			using (new AssertionScope())
 			{

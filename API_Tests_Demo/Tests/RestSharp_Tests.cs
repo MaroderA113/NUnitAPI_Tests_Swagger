@@ -4,19 +4,18 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using RestSharp;
 using System.Net;
 
 namespace API_Tests_Demo.Tests;
 
 public class RestSharp_Tests
 {
-	private static RestClient restClient = new RestClient();
-	RestSharp_Service restSharpService = new RestSharp_Service(restClient);
+	private static RestSharp_Service _restSharpService;
 
 	[SetUp]
 	public void Setup()
 	{
+		_restSharpService = new ();
 	}
 
 	[Test]
@@ -25,7 +24,7 @@ public class RestSharp_Tests
 	[Category("ApiTests")]
 	public void GetUserInfoById(string userID, int expectedUserId)
 	{
-		var response = restSharpService.GetUserInfoById(userID);
+		var response = _restSharpService.GetUserInfoById(userID);
 
 		using (new AssertionScope())
 		{

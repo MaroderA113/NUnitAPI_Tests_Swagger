@@ -10,9 +10,10 @@ public class HttpClient_Service
 	private static readonly string Url = "https://reqres.in/api/";
 	private readonly HttpClient _httpClient;
 
-	public HttpClient_Service(HttpClient httpClient)
+	public HttpClient_Service()
 	{
-		_httpClient = httpClient;
+		_httpClient = CreateHttpClient();
+
 		_httpClient.BaseAddress = new Uri(Url);
 		_httpClient.Timeout = new TimeSpan(0, 0, 30);
 		_httpClient.DefaultRequestHeaders.Clear();
@@ -25,5 +26,16 @@ public class HttpClient_Service
 
 		HttpResponseMessage response = await _httpClient.GetAsync($"users/{userId}");
 		return response;
+	}
+
+	private HttpClient CreateHttpClient()
+	{
+		var socketsHandler = new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(2) };
+		var httpClient = new HttpClient(socketsHandler);
+		
+		//var handler = new HttpClientHandler();
+		//var httpClient = new HttpClient(handler, false);
+
+		return httpClient;
 	}
 }

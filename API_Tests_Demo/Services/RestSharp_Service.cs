@@ -8,9 +8,10 @@ public class RestSharp_Service
 	private static readonly string Url = "https://reqres.in/api/";
 	private readonly RestClient _restClient;
 
-	public RestSharp_Service(RestClient restClient)
+	public RestSharp_Service()
 	{
-		_restClient = restClient;
+		_restClient = CreateHttpClient();
+
 		_restClient.BaseUrl = new Uri(Url);
 		_restClient.Timeout = 30000;
 	}
@@ -22,5 +23,12 @@ public class RestSharp_Service
 
 		IRestResponse response = _restClient.Execute(request);
 		return response;
+	}
+
+	private RestClient CreateHttpClient()
+	{
+		var restClient = new RestClient();
+
+		return restClient;
 	}
 }
