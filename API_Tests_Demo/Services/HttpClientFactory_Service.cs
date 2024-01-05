@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API_Tests_Demo.Services
 {
-	public class HttpClientFactory_Service
+	public class HttpClientFactory_Service : IRestService
 	{
 		private static readonly string Url = "https://reqres.in/api/";
 		private readonly HttpClient _httpClient;

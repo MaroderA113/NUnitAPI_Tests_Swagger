@@ -11,13 +11,13 @@ namespace API_Tests_Demo.Tests;
 
 public class HttpClient_Tests
 {
-	private static HttpClient_Service _httpClientService;
+	private static IRestService _httpClientService;
 	private static JsonSerializerOptions _options;
 
 	[SetUp]
 	public void Setup()
 	{
-		_httpClientService = new ();
+		_httpClientService = new HttpClient_Service();
 		_options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 	}
 

@@ -11,13 +11,13 @@ namespace API_Tests_Demo.Tests
 {
 	public class HttpClientFactory_Tests
 	{
-		private static HttpClientFactory_Service _httpClientFactory_Service;
+		private static IRestService _httpClientFactory_Service;
 		private static JsonSerializerOptions _options;
 
 		[SetUp]
 		public void Setup()
 		{
-			_httpClientFactory_Service = new ();
+			_httpClientFactory_Service = new HttpClientFactory_Service();
 			_options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 		}
 
