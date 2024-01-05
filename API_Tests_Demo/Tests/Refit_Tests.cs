@@ -12,11 +12,11 @@ namespace API_Tests_Demo.Tests
 	public class Refit_Tests
 	{
 		private static readonly string Url = "https://reqres.in/api/";
-		private readonly IRefitClient _refitClient;
+		private readonly IRefitService _httpRefitService;
 
 		public Refit_Tests()
 		{
-			_refitClient = RestService.For<IRefitClient>(Url);
+			_httpRefitService = RestService.For<IRefitService>(Url);
 		}
 
 		[Test]
@@ -25,7 +25,7 @@ namespace API_Tests_Demo.Tests
 		[Category("ApiTests")]
 		public async Task GetUserInfoById(string userID, int expectedUserId)
 		{
-			var response = await _refitClient.GetUserInfoById(userID);
+			var response = await _httpRefitService.GetUserInfoById(userID);
 
 			SingleUserResponse singleUserResponse = JsonConvert.DeserializeObject<SingleUserResponse>(response);
 

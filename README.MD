@@ -3,17 +3,22 @@
 ## API_Tests_Demo
 Демо проект тестирования одного API метода с сайта https://reqres.in/
 
+Интерфейсы:
+- `IRestService`;
+- `IRefitService`;
+- `IMockService`.
+
 Сервисы:
 - `HttpClient_Service`;
 - `HttpClientFactory_Service`;
-- `IRefitClient` интерфейс;
 - `RestSharp_Service`.
 
 Тесты:
 - `HttpClient_Tests` с десериализацией `System.Text.Json` из `String`;
 - `HttpClientFactory_Tests` с десериализацией `System.Text.Json` из `String`;
 - `Refit_Tests` с десериализацией `Newtonsoft.Json`;
-- `RestSharp_Tests` с десериализацией `Newtonsoft.Json`.
+- `RestSharp_Tests` с десериализацией `Newtonsoft.Json`;
+- `Mock_Tests`.
 
 Подробнее про `RestSharp` по ссылке https://restsharp.dev/intro.html
 

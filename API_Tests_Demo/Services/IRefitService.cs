@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace API_Tests_Demo.Services
 {
-	public interface IRefitClient
+	public interface IRefitService
 	{
 		[Get("/users/{userId}")]
 		Task<string> GetUserInfoById(string userId);
