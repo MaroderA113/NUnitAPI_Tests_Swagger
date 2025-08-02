@@ -1,4 +1,7 @@
-﻿namespace API_POST_TEST;
+﻿using System;
+using System.Net.Http;
+
+namespace API_POST_TEST;
 
 public static class Service
 {
